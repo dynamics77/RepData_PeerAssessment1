@@ -169,8 +169,8 @@ str(df_copy)</code></pre>
 <p>Here, again we compute the total number of steps, mean and the median of steps taken per day but now with the dataset with filled missing values.</p>
 <pre class="r"><code>#compute the total number of steps taken per day
 daily_steps_df&lt;-df_copy%&gt;% select(steps,date)%&gt;%
-  group_by(date)%&gt;%
-  summarise(tot_steps=sum(steps))</code></pre>
+group_by(date)%&gt;%
+summarise(tot_steps=sum(steps))</code></pre>
 <pre class="r"><code>##histogram of the total number of steps taken each day
 ##red line added for the mean
 ggplot(daily_steps_df, aes(tot_steps)) +
@@ -195,11 +195,12 @@ difference</code></pre>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
-<pre class="r"><code>#panel plot
+<pre class="r"><code>#compute activity patterns
 df2&lt;-df_copy%&gt;% select(steps,dayOfWeek,interval,date)%&gt;%
   group_by(dayOfWeek,interval)%&gt;%
   summarise(steps=mean(steps))
 
+#plot activity patterns
 ggplot(df2,aes(interval,steps))+geom_line()+
   facet_wrap(~dayOfWeek,ncol=1)+
   xlab(&quot;5-minute interval&quot;)+

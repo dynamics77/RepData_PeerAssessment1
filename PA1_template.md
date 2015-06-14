@@ -2,7 +2,6 @@
 Karunesh Arora  
 June 11, 2015  
 ## Introduction
-
 This assignment we analayze data from a personal activity monitoring device of an individual. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
 ## Loading and preprocessing the data
@@ -158,8 +157,8 @@ now with the dataset with filled missing values.
 ```r
 #compute the total number of steps taken per day
 daily_steps_df<-df_copy%>% select(steps,date)%>%
-  group_by(date)%>%
-  summarise(tot_steps=sum(steps))
+group_by(date)%>%
+summarise(tot_steps=sum(steps))
 ```
 
 
@@ -212,11 +211,12 @@ slightly.
 ## Are there differences in activity patterns between weekdays and weekends?
 
 ```r
-#panel plot
+#compute activity patterns
 df2<-df_copy%>% select(steps,dayOfWeek,interval,date)%>%
   group_by(dayOfWeek,interval)%>%
   summarise(steps=mean(steps))
 
+#plot activity patterns
 ggplot(df2,aes(interval,steps))+geom_line()+
   facet_wrap(~dayOfWeek,ncol=1)+
   xlab("5-minute interval")+
