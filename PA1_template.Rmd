@@ -7,12 +7,14 @@ output:
     keep_md: true
 ---
 ## Introduction
-This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
+
+This assignment we analayze data from a personal activity monitoring device of an individual. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
 ## Loading and preprocessing the data
 ```{r}
 #load required packages
-suppressWarnings(library(ggplot2));suppressWarnings(library(magrittr));suppressWarnings(library(lubridate));suppressMessages(library(dplyr))
+suppressWarnings(library(ggplot2));suppressWarnings(library(magrittr));
+suppressWarnings(library(lubridate));suppressMessages(library(dplyr))
 
 #read the csv format dataset from the current working directory
 df<-read.table(unz("activity.zip", "activity.csv"), header=T, quote="\"", sep=",")
@@ -22,14 +24,13 @@ df$date<-ymd(df$date)
 str(df)
 ```
 ## What is mean total number of steps taken per day?
-Here, we report the total number of steps taken per day, the mean and median total number of steps taken per day. In this part of the assingment we ignore the missing values (NAs) in the dataset.
+Here, we report the total number of steps taken per day, the mean and median total number of steps taken per day. In this part of the assignment we ignore the missing values (NAs) in the dataset.
 
 ```{r}
 #Calculate the total number of steps taken per day. Store output in "daily_total" variable
 daily_total<-df%>% select(steps,date)%>%
   group_by(date)%>%
   summarise(tot_steps=sum(steps))
-
 ##ignore the missing values in the dataset here
 ##round the numbers to 2 decimal place
 daily_total<-daily_total[!is.na(daily_total$tot_steps),2]
@@ -40,8 +41,8 @@ daily_total<-daily_total[!is.na(daily_total$tot_steps),2]
 ##red line added for the mean
 ggplot(daily_total, aes(tot_steps)) +
 geom_histogram(colour="black", fill="white") +
-geom_vline(aes(xintercept=(mean(daily_total$tot_steps))), color="red", linetype="dashed",size=1)+
-xlab("total number of steps taken each day")+ 
+geom_vline(aes(xintercept=mean(daily_total$tot_steps)),color="red", linetype="dashed",size=1)+
+xlab("total number of steps taken each day") + 
 ggtitle("histogram of the total number of steps taken each day")
 ```
 
@@ -154,5 +155,6 @@ ggplot(df2,aes(interval,steps))+geom_line()+
   ylab("number of steps taken")+
   ggtitle("average number of steps taken, averaged across all week of weekend days")
 ```
+
 Results show that the individual is much more active throughout the day on weekends compared to the weekdays. Interestingly, individual is much more active early in the day on weekday compared to the weekend (values below 1000 in the figure above).
 
