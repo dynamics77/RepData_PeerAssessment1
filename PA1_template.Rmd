@@ -7,7 +7,7 @@ output:
     keep_md: true
 ---
 ## Introduction
-This assignment we analayze data from a personal activity monitoring device of an individual. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
+In this assignment we have analayzed the data from a personal activity monitoring device of an individual. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
 ## Loading and preprocessing the data
 ```{r}
@@ -23,7 +23,7 @@ df$date<-ymd(df$date)
 str(df)
 ```
 ## What is mean total number of steps taken per day?
-Here, we report the total number of steps taken per day, the mean and median total number of steps taken per day. In this part of the assignment we ignore the missing values (NAs) in the dataset.
+Here, we report the total number of steps taken per day, the mean and median total number of steps taken per day by an individual. In this part of the assignment we have ignored the missing values (NAs) in the dataset.
 
 ```{r}
 #Calculate the total number of steps taken per day. Store output in "daily_total" variable
